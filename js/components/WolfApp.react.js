@@ -1,7 +1,7 @@
 var React = require('react');
 var WolfStore = require('../stores/WolfStore');
 //var ClassList = require('./ClassList.react');
-//var LoginForm = require('./LoginForm.react');
+var LoginForm = require('./LoginForm.react');
 
 function getAppState() {
 	return {
@@ -37,7 +37,7 @@ var WolfApp = React.createClass({
 		} else {
 			return (
 				<div>
-					<p> "HI" </p>
+					<LoginForm />
 				</div>
 			);
 		}

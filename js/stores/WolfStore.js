@@ -12,6 +12,7 @@ function setMessage(message) {
 }
 
 function setClasses(classes) {
+	console.log(classes);
 	_classes = classes;
 }
 
@@ -41,14 +42,14 @@ var WolfStore = _.extend({}, EventEmitter.prototype, {
 	},
 
 	removeChangeListener: function(callback) {
-		this.removeChangeListener('change', callback);
+		//this.removeChangeListener('change', callback);
 	}
 });
 
 WolfDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
-		case WolfConstants.RECEIVE_LOGIN:
+		case WolfConstants.RECEIVE_LOGIN_STATUS:
 			setStatus(action.status);
 			setMessage(action.message);
 			break;
