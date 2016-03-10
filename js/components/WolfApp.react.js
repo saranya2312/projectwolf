@@ -31,7 +31,7 @@ var WolfApp = React.createClass({
 		if(this.state.status) {
 			return (
 				<div>
-					<p> <ClassList /> </p>
+					<ClassList />
 				</div>
 			);
 		} else {

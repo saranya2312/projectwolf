@@ -28,32 +28,19 @@ var ClassList = React.createClass({
   	},
 
 	render: function() {
-		// if (this.state.classes.length == 0) {
-		// 	var classes =
-		// 		<div>
-  //       			<p>  You have no classes. </p>
-		// 		</div>
-		// } else {
-			var classes = this.state.classes;
-		    return (
-		      <ol>
-		        {classes.map(function(cl) {
-		          return <li key={cl}>{cl}</li>;
-		        })}
-		      </ol>
-		    );
-			// var classes = this.state.classes.map(function(cl) {
-			// 	console.log(cl);
-			// 	return (
-			// 		<li key={cl}> {cl} </li>
-			// 	);
-			// });
-			// return (
-			// 	<div>
-			// 		{classes}
-			// 	</div>
-			// );
-		// }
+		var classes = this.state.classes.map(function(cl) {
+				console.log(cl);
+				return (
+					<li key={cl}> {cl} </li>
+				);
+			});
+		return (
+			<div>
+				<h1> CLASSES </h1>
+				{classes}
+			</div>
+		);
+
 	}
 });
 
