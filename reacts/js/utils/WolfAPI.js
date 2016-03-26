@@ -29,6 +29,7 @@ module.exports = {
 
 	//Login a user
 	login: function(username, password, callback) {
+		var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/create_user?user_email=" + username;
 		var obj = {"msg": "Login successful!", "success": true}
 		callback(obj);
 	},

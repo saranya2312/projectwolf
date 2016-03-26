@@ -7,6 +7,7 @@ var WolfActions = {
 		console.log(username, password);
 		var self = this;
 		WolfAPI.login(username, password, function(obj) {
+			console.log(obj);
 			status = obj.success;
 			message = obj.msg;
 			console.log(status, message);
