@@ -1,0 +1,33 @@
+{
+  "name": "project-wolf",
+  "version": "0.0.1",
+  "description": "Location based service app with react",
+  "main": "js/app.js",
+  "dependencies": {
+    "flux": "*",
+    "react": "*",
+    "underscore": "^1.7.0",
+    "JSON":"*",
+    "material-ui":"0.14.4",
+    "react-tap-event-plugin":"*"
+  },
+  "devDependencies": {
+    "browserify": "~6.2.0",
+    "envify": "~3.0.0",
+    "react": "*",
+    "react-dom": "*",
+    "reactify": "^0.15",
+    "watchify": "~2.1.0"
+  },
+  "scripts": {
+    "start": "watchify -o ../../static/static/js/class.js -v -d .",
+    "build": "browserify . | uglifyjs -cm > ../../static/static/js/class.js"
+  },
+  "author": "Vignesh Prasad",
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  }
+}

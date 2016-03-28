@@ -4,15 +4,18 @@
   "description": "Location based service app with react",
   "main": "js/app.js",
   "dependencies": {
-    "flux": "^2.0.0",
-    "react": "^0.12.0",
+    "flux": "*",
+    "react": "*",
     "underscore": "^1.7.0",
-    "JSON":"*"
+    "JSON":"*",
+    "material-ui":"0.14.4",
+    "react-tap-event-plugin":"*"
   },
   "devDependencies": {
     "browserify": "~6.2.0",
     "envify": "~3.0.0",
-    "react": "^0.12.0",
+    "react": "*",
+    "react-dom": "*",
     "reactify": "^0.15",
     "watchify": "~2.1.0"
   },

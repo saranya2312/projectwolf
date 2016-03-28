@@ -7,16 +7,19 @@ var AppBar = require('material-ui/lib/app-bar');
 var CircularProgress = require('material-ui/lib/circular-progress');
 var List = require('material-ui/lib/lists/list');
 var ListItem = require('material-ui/lib/lists/list-item');
+var LeftNav = require('material-ui/lib/left-nav');
+var MenuItem = require('material-ui/lib/menus/menu-item');
 
 
 var classRedirect = function(id) {
 	return function() {
-		window.location = '/class?id=' + id;
+		window.location = '/class/' + id;
   	}
 }
 
 function getClassState() {
 	return {
+		open: false,
 		classes: WolfStore.getClasses(),
 	};
 }
@@ -36,22 +39,54 @@ var ClassList = React.createClass({
 		WolfStore.removeChangeListener(this._onChange);
 	},
 
+	handleToggle: function() {
+		this.setState({open: !this.state.open});
+	},
+
+  	handleClose: function() {
+  		this.setState({open: false});	
+  	},
+
 	_onChange: function() {
     	this.setState(getClassState());
   	},
 
-	render: function() {
+  	_logout: function() {
+  		WolfActions.logout();
+  	},
 
+  	_openLeftNav: function() {
+  		this.setState({open: true});
+  	},
+
+	render: function() {
+		var menus = (
+			<div>
+				<AppBar
+		    		title="Classes"
+		    		onLeftIconButtonTouchTap={this._openLeftNav}/>
+				<LeftNav
+          			docked={false}
+         			width={200}
+          			open={this.state.open}
+          			onRequestChange={open => this.setState({open})}
+        		>
+        			<img src="/static/leftNavImage.png" width="200"></img>
+          			<MenuItem onTouchTap={this._logout}>Logout</MenuItem>
+        		</LeftNav>
+	        </div>
+		)
 		if(this.state.classes == WolfConstants.CLASSES_NOT_LOADED) {
 			return (
 				<div>
-  					<AppBar
-	    				title="Classes"/>
+					{menus}
     				<CircularProgress 
     					style={{
     						"position": "absolute",
   							"top": "50%",
-  							"left": "50%"
+  							"left": "50%",
+  							"marginRight": "-50%",
+    						"transform": "translate(-50%, -50%)"
     					}}/>
     			</div>
 			);
@@ -68,8 +103,7 @@ var ClassList = React.createClass({
 			});
 			return (
 				<div>
-				  	<AppBar
-	    				title="Classes"/>
+				  	{menus}
 	    			<List>
 						{classes}
 					</List>

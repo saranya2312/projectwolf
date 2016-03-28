@@ -7,7 +7,6 @@ module.exports = {
 		makeCorsLoginRequest(username, password, function(responseText, error) {
 			if(!error) {
 				var result = JSON.parse(responseText);
-				console.log(result.success);
 				if(result.success) {
 					//Redirect to class list
 					window.location.href = '/classes';

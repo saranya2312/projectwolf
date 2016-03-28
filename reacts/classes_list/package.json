@@ -8,7 +8,7 @@
     "react": "*",
     "underscore": "^1.7.0",
     "JSON":"*",
-    "material-ui":"*",
+    "material-ui":"0.14.4",
     "react-tap-event-plugin":"*"
   },
   "devDependencies": {

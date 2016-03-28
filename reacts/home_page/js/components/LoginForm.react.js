@@ -1,6 +1,10 @@
 var React = require('react');
+var ReactDOM = require("react-dom")
 var WolfActions = require('../actions/WolfActions');
 var WolfStore = require('../stores/WolfStore');
+var AppBar = require('material-ui/lib/app-bar');
+var TextField = require('material-ui/lib/text-field');
+var RaisedButton = require('material-ui/lib/raised-button');
 
 
 function getLoginState() {
@@ -47,6 +51,7 @@ var LoginForm = React.createClass({
 	},
 
 	_login: function() {
+		console.log(this.state.username, this.state.password);
 		WolfActions.login(this.state.username, this.state.password);
 	},
 
@@ -54,27 +59,27 @@ var LoginForm = React.createClass({
 		// login mode:
 		return (
 			<div className="login-form">
-				<h1> Login </h1>
-	            <div className="login-email">
-	            	<p> Username </p>
-				    <input
-				    	onChange={this.handleUsernameChange}
-						type='text'
-						name="Username"
-						ref = 'username' >
-					</input>
-					<br></br>
-					<p> Password </p>
-					<input
-						onChange={this.handlePasswordChange}
-						type='password'
-						name="Password"
-						ref = 'password' >
-					</input>
+				<AppBar
+	    			title="Project Wolf Login"/>
+	    		<div style={{
+    						"position": "absolute",
+  							"top": "50%",
+  							"left": "50%",
+  							"marginRight": "-50%",
+    						"transform": "translate(-50%, -50%)"
+    					}}>
+		    		<TextField
+		    			onChange={this.handleUsernameChange}
+	      				floatingLabelText="Username"/>
+	      			<br/>
+	      			<TextField
+	      				onChange={this.handlePasswordChange}
+	      				floatingLabelText="Password"
+	      				type="password"/>
+					<p> {this.state.message} </p>
+					<br/>
+					<RaisedButton label="Login" primary={true} onClick={this._login}/>
 				</div>
-				<p> {this.state.message} </p>
-				<br></br>
-				<button type="button" onClick={this._login}> Login </button>
 			</div>
 		);
 	}
