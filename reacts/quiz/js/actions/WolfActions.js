@@ -13,7 +13,12 @@ var WolfActions = {
 	},
 
 	submitQuiz: function(obj) {	
+		//TODO
+	},
 
+
+	endQuiz: function() {	
+		//TODO
 	},
 
 	logout: function() {

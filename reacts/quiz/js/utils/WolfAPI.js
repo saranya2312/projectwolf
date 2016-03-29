@@ -1,5 +1,8 @@
 var JSON = require('JSON');
 var WolfActions = require('../actions/WolfActions');
+var quizId = $('.quiz-id-span').attr('id');
+var classId = $('.class-id-span').attr('id');
+
 
 module.exports = {
 	receiveQuiz: function(quizId, classId, callback) {
@@ -12,6 +15,7 @@ module.exports = {
             className: "CS4641",
             quiz: {
               inProgress: true,
+              isDone: false,
               dependsOnLocation: true,
               name: "Quiz 1",
               buildingName: "Skiles",
@@ -32,16 +36,19 @@ module.exports = {
                           }
                       ],
                       correctOption: "A",
+                      totalAnswered: 45,
                       //The results can be empty until the quiz is closed.
                       results: [
-                          {
-                              id: 1,
-                              numStudents: 0
-                          },
-                          {
-                              id: 2,
-                              numStudents: 0
-                          }
+                            {
+                                text:"Yes",
+                                id: 1,
+                                numStudents: 15
+                            },
+                            {
+                                text:"No",
+                                id: 2,
+                                numStudents: 30
+                            }
                       ]
                   },
                   {
@@ -60,15 +67,18 @@ module.exports = {
                           }
                       ],
                       correctOption: "A",
+                      totalAnswered: 45,
                       //The results can be empty until the quiz is closed.
                       results: [
                           {
+                              text: "Yes",
                               id: 1,
-                              numStudents: 0
+                              numStudents: 12
                           },
                           {
+                              text: "No",
                               id: 2,
-                              numStudents: 0
+                              numStudents: 33
                           }
                       ]
                   }

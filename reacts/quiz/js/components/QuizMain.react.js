@@ -4,6 +4,7 @@ var WolfActions = require('../actions/WolfActions');
 var WolfStore = require('../stores/WolfStore');
 var WolfConstants = require('../constants/WolfConstants');
 var TakeQuiz = require('./TakeQuiz.react.js');
+var QuizResults = require('./QuizResults.react.js');
 var AppBar = require('material-ui/lib/app-bar');
 var CircularProgress = require('material-ui/lib/circular-progress');
 var List = require('material-ui/lib/lists/list');
@@ -65,6 +66,10 @@ var QuizMain = React.createClass({
   		WolfActions.submitQuiz(this.state.answers);
   	},
 
+  	_endQuiz:function() {
+  		WolfActions.endQuiz();
+  	},
+
 	render: function() {
 		var menus = (
 			<div>
@@ -98,7 +103,16 @@ var QuizMain = React.createClass({
 			);
 		} else {
 			var heading = this.state.className + " --> " + this.state.quiz.name
-			if(this.state.isStudent && !this.state.quiz.isProgress) {
+
+			//STUDENT VIEWS
+			if(this.state.isStudent && this.state.quiz.inProgress) {
+				var quiz = (
+					<div style={{"margin":"10"}}>
+						<TakeQuiz quiz={this.state.quiz} changeOptions={this._changeOptions}/>
+						<RaisedButton label="Submit" primary={true} onClick={this._submitQuiz}/>
+					</div>
+				)
+			} else if(this.state.isStudent && !this.state.quiz.inProgress && !this.state.quiz.isDone) {
 				var quiz = (
 					<p style={{
 							"color": "grey",
@@ -111,14 +125,47 @@ var QuizMain = React.createClass({
     					This quiz is not open.
     				</p>
 				)
-			}
-			if(this.state.isStudent && this.state.quiz.isProgress || true) {
+			} else if(this.state.isStudent && !this.state.quiz.isProgress && this.state.quiz.isDone) {
 				var quiz = (
-					<div style={{"margin":"10"}}>
-						<TakeQuiz quiz={this.state.quiz} changeOptions={this._changeOptions}/>
-						<RaisedButton label="Submit" primary={true} onClick={this._submitQuiz}/>
+					<div style={{
+							"color": "grey",
+    						"position": "absolute",
+  							"top": "50%",
+  							"left": "50%",
+  							"marginRight": "-50%",
+    						"transform": "translate(-50%, -50%)"
+    					}}>
+						<p> This quiz has already occurred. </p>
+						<p> You may not take it at this time </p>
 					</div>
 				)
+
+			//PROFESSOR VIEWS
+			} else if(!this.state.isStudent && this.state.quiz.isProgress) {
+				var quiz = (
+					<div style={{
+							"color": "grey",
+    						"position": "absolute",
+  							"top": "50%",
+  							"left": "50%",
+  							"marginRight": "-50%",
+    						"transform": "translate(-50%, -50%)"
+    					}}>
+						<p> This quiz is currently in progress. </p>
+						<p> You may not edit at this time </p>
+						<RaisedButton label="End Quiz" primary={true} onClick={this._endQuiz}/>
+					</div>
+				)
+			} if(!this.state.isStudent && !this.state.quiz.isProgress && this.state.quiz.isDone || true) {
+				//TODO
+				var quiz = (
+					<div style={{"margin":"10"}}>
+						<QuizResults questions={this.state.quiz.questions} />
+					</div>
+				)
+			} else if(!this.state.isStudent && !this.state.quiz.isProgress && !this.state.quiz.isDone) {
+				//TODO
+				var quiz = {}
 			}
 
 			return (
@@ -135,6 +182,7 @@ var QuizMain = React.createClass({
 });
 
 module.exports = QuizMain;
+
 
 
 
