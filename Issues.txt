@@ -1,0 +1,4 @@
+1. Security concern when sending username and password over the network
+2. If professor closes the quiz before student submits, the user needs to know that their submission was not taken into account (ALSO PROBLEM WITH CLICKER)
+3. Possibility of unanswered questions that skews the data
+4. Prof should be able to export data into csv of some kind where there is mapping from username to score

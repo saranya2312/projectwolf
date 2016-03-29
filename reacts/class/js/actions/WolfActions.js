@@ -7,13 +7,12 @@ var WolfActions = {
 		WolfAPI.receiveQuizzes(classId, function(obj) {
 			WolfDispatcher.handleAction({
 				actionType: WolfConstants.RECEIVE_CLASSNAME,
-				obj: obj.name
+				obj: obj.class_name
 			});
 			WolfDispatcher.handleAction({
 				actionType: WolfConstants.RECEIVE_QUIZZES,
 				obj: obj.quizzes
 			});
-
 		});
 	},
 }

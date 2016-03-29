@@ -10,7 +10,6 @@ var injectTapEventPlugin = require('react-tap-event-plugin');
 injectTapEventPlugin();
 
 var classId = $('.class-id-span').attr('id');
-console.log(classId);
 WolfActions.receiveQuizzes(classId);
 
 var QuizList = require('./components/QuizList.react');

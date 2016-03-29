@@ -10,6 +10,7 @@ module.exports = {
         var result = {
             success: true,
             name: "CS 4641",
+            id: 1,
             quizzes: [
               {
                 name: "Quiz 1",

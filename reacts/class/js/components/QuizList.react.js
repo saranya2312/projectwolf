@@ -11,9 +11,10 @@ var LeftNav = require('material-ui/lib/left-nav');
 var MenuItem = require('material-ui/lib/menus/menu-item');
 
 
-var quizRedirect = function(id) {
+var quizRedirect = function(quizId) {
 	return function() {
-		window.location = '/quiz?id=' + id;
+		var classId = $('.class-id-span').attr('id');
+		window.location = '/class/' + classId + '/quiz/' + quizId;
   	}
 }
 
@@ -69,7 +70,7 @@ var QuizList = React.createClass({
           			docked={false}
          			width={200}
           			open={this.state.open}
-          			onRequestChange={open => this.setState({open})}
+          			onRequestChange={this.handleToggle}
         		>
         			<img src="/static/leftNavImage.png" width="200"></img>
           			<MenuItem onTouchTap={this._logout}>Logout</MenuItem>

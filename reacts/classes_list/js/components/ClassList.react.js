@@ -69,7 +69,7 @@ var ClassList = React.createClass({
           			docked={false}
          			width={200}
           			open={this.state.open}
-          			onRequestChange={open => this.setState({open})}
+          			onRequestChange={function() { this.setState({open})}}
         		>
         			<img src="/static/leftNavImage.png" width="200"></img>
           			<MenuItem onTouchTap={this._logout}>Logout</MenuItem>
