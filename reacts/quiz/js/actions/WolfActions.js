@@ -67,8 +67,8 @@ var WolfActions = {
 
 	submitQuiz: function(obj) {	
 		var self = this;
-		WolfAPI.submitQuiz(function(msg) {
-			self.setMessage(obj.msg);
+		WolfAPI.submitQuiz(obj, function(msg) {
+			self.setMessage(msg);
 		});
 	},
 

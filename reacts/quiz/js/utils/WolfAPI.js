@@ -41,9 +41,9 @@ module.exports = {
 	},
 
   submitQuiz: function(obj, callback) {
-    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_quiz?user_email=" + username;
+    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/submit?user_email=" + username;
     url = url + "&qid=" + quizId;
-    url = url + "&response=" + JSON.stringify(obj);
+    url = url + "&response=" + encodeURIComponent(JSON.stringify(obj));
     makeCorsRequest(url, function(responseText, error) {
       if(!error) {
         var result = JSON.parse(responseText);

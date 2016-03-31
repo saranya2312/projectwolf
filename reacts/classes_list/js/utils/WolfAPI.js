@@ -21,8 +21,7 @@ module.exports = {
       }
     });
   },
-
-	//Login a user
+  
 	receiveClasses: function(callback) {
     var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_classes_?user_email=" + username;
 		makeCorsRequest(url, function(responseText, error) {
