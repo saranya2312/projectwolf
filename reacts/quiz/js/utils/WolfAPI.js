@@ -1,10 +1,28 @@
- var JSON = require('JSON');
+var JSON = require('JSON');
 var WolfActions = require('../actions/WolfActions');
 var quizId = $('.quiz-id-span').attr('id');
 var classId = $('.class-id-span').attr('id');
 var username = $('.username-span').attr('id');
 
 module.exports = {
+  logout: function() {
+    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/logout?user_email=" + username;
+    makeCorsRequest(url, function(responseText, error) {
+      if(!error) {
+        var result = JSON.parse(responseText);
+        if(result.success) {
+          window.location.href = '/';    
+        } else {
+          //TODO: Got to display message that we're unable to logout.
+          window.location.href = '/';
+        }
+      } else {
+        console.log("CORS Failed. Redirect to login.");
+        window.location.href = '/';
+      }
+    });
+  },
+
 	receiveQuiz: function(quizId, classId, callback) {
     var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_quiz?user_email=" + username;
     url = url + "&qid=" + quizId;
@@ -21,6 +39,25 @@ module.exports = {
 			}
 		});
 	},
+
+  submitQuiz: function(obj, callback) {
+    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_quiz?user_email=" + username;
+    url = url + "&qid=" + quizId;
+    url = url + "&response=" + JSON.stringify(obj);
+    makeCorsRequest(url, function(responseText, error) {
+      if(!error) {
+        var result = JSON.parse(responseText);
+        if(!result.success) {
+          callback(result.msg);
+        } else {
+          window.location.href = '/user/' + username + '/class/' + classId;
+        }
+      } else {
+        console.log("Some crazy business happened here and CORS failed");
+        callback("Could not submit quiz. Please check your internet and try again.");
+      }
+    });
+  },
 
   editQuiz: function(quiz, callback) {
     makeCorsRequest(a, function(responseText, error) {

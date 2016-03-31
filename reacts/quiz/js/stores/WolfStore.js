@@ -10,10 +10,11 @@ var _spinner = false;
 var _message = '';
 var _dialog = false;
 var _active = -1;
+var _submitError = '';
 
 
-function setLocation(buildingName) {
-	_location = buildingName;
+function setSubmitError(error) {
+	_submitError = error;
 }
 
 function setQuiz(quiz) {
@@ -70,6 +71,10 @@ var WolfStore = _.extend({}, EventEmitter.prototype, {
 		return _isStudent;
 	},
 
+	getSubmitError: function() {
+		return _submitError;
+	},
+
 	getQuestion: function(num) {
 		console.log(_quiz.questions[num-1])
 		return _quiz.questions[num-1];
@@ -119,6 +124,10 @@ WolfDispatcher.register(function(payload) {
 		
 		case WolfConstants.SET_SPINNER:
 			setSpinner(action.obj);
+			break;
+
+		case WolfConstants.SET_SUBMIT_ERROR:
+			setSubmitError(action.obj);
 			break;
 
 		case WolfConstants.ADD_QUESTION:

@@ -18,16 +18,16 @@ var Question = React.createClass({
 			return (
 				<RadioButton
 					key={option.oid}
-					onClick={changeOption(option.code, self.props.question.number, self.props.changeOptions)}
+					onClick={changeOption(option.code, self.props.question.s_no, self.props.changeOptions)}
     				value={option.code}
     				label={option.text}/>
         	);
 		});
-		var refs = "Question" + this.props.question.number
+		var refs = "Question" + this.props.question.s_no
 		return (
 			<div style={{"margin":"10", "paddingBottom":"10", "paddingTop":"10"}}>
 				<p> {this.props.question.text} </p>
-				<RadioButtonGroup name={refs} ref={refs}>
+				<RadioButtonGroup name={refs}>
 					{options}
 				</RadioButtonGroup>
 			</div>

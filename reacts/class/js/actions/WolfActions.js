@@ -28,6 +28,10 @@ var WolfActions = {
 		});
 	},
 
+	logout: function() {
+		WolfAPI.logout();
+	},
+
 	addQuiz: function(quizName) {
 		WolfDispatcher.handleAction({
 			actionType: WolfConstants.SET_SPINNER,

@@ -4,9 +4,26 @@ var WolfActions = require('../actions/WolfActions');
 var username = $('.username-span').attr('id');
 
 module.exports = {
+  logout: function() {
+    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/logout?user_email=" + username;
+    makeCorsRequest(url, function(responseText, error) {
+      if(!error) {
+        var result = JSON.parse(responseText);
+        if(result.success) {
+          window.location.href = '/';    
+        } else {
+          //TODO: Got to display message that we're unable to logout.
+          window.location.href = '/';
+        }
+      } else {
+        console.log("CORS Failed. Redirect to login.");
+        window.location.href = '/';
+      }
+    });
+  },
+
 	//Login a user
 	receiveClasses: function(callback) {
-    console.log(username);
     var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_classes_?user_email=" + username;
 		makeCorsRequest(url, function(responseText, error) {
 			if(!error) {

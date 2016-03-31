@@ -17,6 +17,7 @@ var RaisedButton = require('material-ui/lib/raised-button');
 
 function getQuizState() {
 	return {
+		submitError: WolfStore.getSubmitError(),
 		answers: {},
 		open: false,
 		isStudent: WolfStore.getIsStudent(),
@@ -64,6 +65,7 @@ var QuizMain = React.createClass({
   	},
 
   	_submitQuiz: function() {
+  		console.log(this.state.answers);
   		WolfActions.submitQuiz(this.state.answers);
   	},
 
@@ -111,6 +113,7 @@ var QuizMain = React.createClass({
 				var quiz = (
 					<div style={{"margin":"10"}}>
 						<TakeQuiz quiz={this.state.quiz} changeOptions={this._changeOptions}/>
+						<p style={{"color":"red"}}>{this.state.submitError} </p>
 						<RaisedButton label="Submit" primary={true} onClick={this._submitQuiz}/>
 					</div>
 				)
@@ -165,11 +168,21 @@ var QuizMain = React.createClass({
 					</div>
 				)
 			} else if(!this.state.isStudent && !this.state.quiz.isProgress && !this.state.quiz.isDone) {
-				var quiz = (
-					<div style={{"margin":"10"}}>
-						<EditQuiz quiz={this.state.quiz} />
-					</div>
-				)
+				// var quiz = (
+				// 	<div style={{"margin":"10"}}>
+				// 		<EditQuiz quiz={this.state.quiz} />
+				// 	</div>
+				// )
+				<div style={{
+						"color": "grey",
+						"position": "absolute",
+							"top": "50%",
+							"left": "50%",
+							"marginRight": "-50%",
+						"transform": "translate(-50%, -50%)"
+					}}>
+					<p> You may edit this quiz from your admin console. </p>
+				</div>
 			}
 
 			return (

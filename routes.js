@@ -23,9 +23,8 @@ module.exports = function(app, passport) {
 
     app.get('/user/:username/class/:classid/quiz/:quizid', function(req, res) {
         var username = req.params.username;
-        var class_id = req.params.classId;
+        var class_id = req.params.classid;
         var quiz_id = req.params.quizid;
-        console.log(quiz_id);
         res.render('quiz.ejs', {
             username: username,
             quiz_id: quiz_id,

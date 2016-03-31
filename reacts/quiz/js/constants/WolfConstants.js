@@ -6,5 +6,6 @@ module.exports = ({
 	SET_DIALOG: 'set_dialog',
 	SET_IS_STUDENT: 'set_is_student',
 	SET_ACTIVE: 'set_active',
+	SET_SUBMIT_ERROR: 'set_submit_error',
 	ADD_QUESTION: 'add_question',
 });

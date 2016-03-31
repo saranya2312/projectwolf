@@ -26,6 +26,13 @@ var WolfActions = {
 		})
 	},
 
+	setActive: function(num) {
+		WolfDispatcher.handleAction({
+			actionType: WolfConstants.SET_ACTIVE,
+			obj: num
+		})
+	},
+
 	setMessage: function(message) {
 		WolfDispatcher.handleAction({
 			actionType: WolfConstants.SET_MESSAGE,
@@ -38,10 +45,6 @@ var WolfActions = {
 			actionType: WolfConstants.SET_SPINNER,
 			obj: bool
 		});
-	},
-
-	checkLocation: function() {
-
 	},
 
 	editQuiz: function(quiz) {
@@ -63,7 +66,10 @@ var WolfActions = {
 	},
 
 	submitQuiz: function(obj) {	
-		//asdf
+		var self = this;
+		WolfAPI.submitQuiz(function(msg) {
+			self.setMessage(obj.msg);
+		});
 	},
 
 
@@ -72,7 +78,7 @@ var WolfActions = {
 	},
 
 	logout: function() {
-		//TODO
+		WolfAPI.logout();
 	},
 }
 

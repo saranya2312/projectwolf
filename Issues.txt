@@ -1,4 +1,4 @@
 1. If professor closes the quiz before student submits, the user needs to know that their submission was not taken into account (ALSO PROBLEM WITH CLICKER)
 2. Possibility of unanswered questions that skews the data
 3. Not exactly real time. Student needs to refresh page to see quizzes
-4. Handling of CORS Failure for any list views.
+4. Handling of CORS Failure for anything.

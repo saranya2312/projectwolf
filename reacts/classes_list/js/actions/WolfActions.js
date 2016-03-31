@@ -49,10 +49,7 @@ var WolfActions = {
 	},
 
 	logout: function() {
-		document.cookie = "; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-		//TODO: Hit API endpoint for logout
-		console.log(document.cookie);
-		window.location.href = '/';
+		WolfAPI.logout();
 	},
 }
 
