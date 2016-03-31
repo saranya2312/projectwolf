@@ -10,6 +10,13 @@ var WolfActions = {
 				message: msg
 			});
 		});
+	},
+
+	setMessage: function(message) {
+		WolfDispatcher.handleAction({
+			actionType: WolfConstants.DISPLAY_MESSAGE,
+			message: message
+		});
 	}
 }
 

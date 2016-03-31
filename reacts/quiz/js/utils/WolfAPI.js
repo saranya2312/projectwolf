@@ -1,4 +1,4 @@
-var JSON = require('JSON');
+ var JSON = require('JSON');
 var WolfActions = require('../actions/WolfActions');
 var quizId = $('.quiz-id-span').attr('id');
 var classId = $('.class-id-span').attr('id');
@@ -11,10 +11,10 @@ module.exports = {
 				var result = JSON.parse(responseText);
         var result = {
             success: true,
-            isStudent: true,
+            isStudent: false,
             className: "CS4641",
             quiz: {
-              inProgress: true,
+              inProgress: false,
               isDone: false,
               dependsOnLocation: true,
               name: "Quiz 1",
@@ -27,60 +27,19 @@ module.exports = {
                           {
                               id: 1,
                               code: "A",
-                              text: "Yes"
-                          },
-                          {
-                              code: "B",
-                              id: 2,
-                              text: "No"
-                          }
-                      ],
-                      correctOption: "A",
-                      totalAnswered: 45,
-                      //The results can be empty until the quiz is closed.
-                      results: [
-                            {
-                                text:"Yes",
-                                id: 1,
-                                numStudents: 15
-                            },
-                            {
-                                text:"No",
-                                id: 2,
-                                numStudents: 30
-                            }
-                      ]
-                  },
-                  {
-                      text: "Are you not here?",
-                      number: 2,
-                      options: [
-                          {
-                              id: 1,
-                              code: "A",
-                              text: "Yes"
-                          },
-                          {
-                              code: "B",
-                              id: 2,
-                              text: "No"
-                          }
-                      ],
-                      correctOption: "A",
-                      totalAnswered: 45,
-                      //The results can be empty until the quiz is closed.
-                      results: [
-                          {
                               text: "Yes",
-                              id: 1,
-                              numStudents: 12
+                              numStudents: 15,
                           },
                           {
-                              text: "No",
+                              code: "B",
                               id: 2,
-                              numStudents: 33
+                              numStudents: 30,
+                              text: "No"
                           }
-                      ]
+                      ],
+                      correctOption: "A",
+                      totalAnswered: 45,
+                      //The results can be empty until the quiz is closed.
                   }
               ]
             }
@@ -94,8 +53,21 @@ module.exports = {
 				console.log("Some crazy business happened here and CORS failed");
 			}
 		});
+	},
 
-	}
+  editQuiz: function(quiz, callback) {
+    makeCorsRequest(classId, quizId, function(responseText, error) {
+      if(!error) {
+        var result = JSON.parse(responseText);
+        var result = {
+            success: true,
+        }
+        callback(result)
+      } else {
+        console.log("Some crazy business happened here and CORS failed");
+      }
+    });
+  }
 }
 
 // Create the XHR object.

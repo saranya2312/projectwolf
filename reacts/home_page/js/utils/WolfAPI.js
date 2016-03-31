@@ -9,12 +9,13 @@ module.exports = {
 				var result = JSON.parse(responseText);
 				if(result.success) {
 					//Redirect to class list
+          document.cookie = username;
 					window.location.href = '/classes';
 				} else {
 					callback(result.msg)
 				}
 			} else {
-				console.log("Some crazy business happened here and CORS failed");
+				callback("Login Failed. Please check your internet and try again");
 			}
 		});
 
@@ -41,12 +42,7 @@ function createCORSRequest(method, url) {
 // Make the actual CORS request.
 function makeCorsLoginRequest(username, password, callback) {
   // All HTML5 Rocks properties support CORS.
-
-  //TODO: Need to fix this once the request is actually there!
-  //var url = 'https://ashwyn.pythonanywhere.com/welcome/wolf/login?username=' + username +
-  //				'&password=' + password;
-  var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/create_user?user_email=vignesh@gatech.edu"
-
+  var url = 'http://ashwyn.pythonanywhere.com/welcome/wolf/login?user_email=' + username;
   var xhr = createCORSRequest('GET', url);
   if (!xhr) {
     alert('CORS not supported');

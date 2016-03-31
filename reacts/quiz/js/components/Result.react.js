@@ -7,7 +7,7 @@ var RadioButtonGroup = require('material-ui/lib/radio-button-group');
 var Result = React.createClass({
 	render: function() {
 		var self = this;
-		var options = this.props.question.results.map(function(option) {
+		var options = this.props.question.options.map(function(option) {
 			var percent = option.numStudents / self.props.question.totalAnswered;
 			var width = percent * 300
 			return (

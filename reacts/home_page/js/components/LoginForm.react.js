@@ -51,8 +51,11 @@ var LoginForm = React.createClass({
 	},
 
 	_login: function() {
-		console.log(this.state.username, this.state.password);
-		WolfActions.login(this.state.username, this.state.password);
+		if(!this._validateEmail(this.state.username)) {
+			WolfActions.setMessage("Please enter a valid email and try again");
+		} else {
+			WolfActions.login(this.state.username, this.state.password);
+		}
 	},
 
 	render: function() {
@@ -70,13 +73,13 @@ var LoginForm = React.createClass({
     					}}>
 		    		<TextField
 		    			onChange={this.handleUsernameChange}
-	      				floatingLabelText="Username"/>
+	      				floatingLabelText="Enter Gatech Email"/>
 	      			<br/>
 	      			<TextField
 	      				onChange={this.handlePasswordChange}
 	      				floatingLabelText="Password"
 	      				type="password"/>
-					<p> {this.state.message} </p>
+					<p style={{"color":"red"}}> {this.state.message} </p>
 					<br/>
 					<RaisedButton label="Login" primary={true} onClick={this._login}/>
 				</div>

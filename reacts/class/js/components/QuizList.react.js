@@ -9,6 +9,7 @@ var List = require('material-ui/lib/lists/list');
 var ListItem = require('material-ui/lib/lists/list-item');
 var LeftNav = require('material-ui/lib/left-nav');
 var MenuItem = require('material-ui/lib/menus/menu-item');
+var AddQuiz = require('./AddQuiz.react');
 
 
 var quizRedirect = function(quizId) {
@@ -23,6 +24,7 @@ function getQuizState() {
 		open: false,
 		class_name: WolfStore.getClassName(),
 		quizzes: WolfStore.getQuizzes(),
+		isStudent: WolfStore.getIsStudent()
 	};
 }
 
@@ -92,6 +94,11 @@ var QuizList = React.createClass({
     			</div>
 			);
 		} else {
+			if(!this.state.isStudent) {
+				var addQuiz = ( 
+					<AddQuiz />
+				)
+			}
 			var quizzes = this.state.quizzes.map(function(quiz) {
 				quizOnClick = quizRedirect(quiz.id)
 				return (
@@ -107,6 +114,7 @@ var QuizList = React.createClass({
 	    			<List>
 						{quizzes}
 					</List>
+					{addQuiz}
 				</div>
 			);
 		}

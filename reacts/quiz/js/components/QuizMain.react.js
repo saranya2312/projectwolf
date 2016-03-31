@@ -5,6 +5,7 @@ var WolfStore = require('../stores/WolfStore');
 var WolfConstants = require('../constants/WolfConstants');
 var TakeQuiz = require('./TakeQuiz.react.js');
 var QuizResults = require('./QuizResults.react.js');
+var EditQuiz = require('./EditQuiz.react.js');
 var AppBar = require('material-ui/lib/app-bar');
 var CircularProgress = require('material-ui/lib/circular-progress');
 var List = require('material-ui/lib/lists/list');
@@ -71,6 +72,7 @@ var QuizMain = React.createClass({
   	},
 
 	render: function() {
+		console.log("RE-RENDER");
 		var menus = (
 			<div>
 				<LeftNav
@@ -156,16 +158,18 @@ var QuizMain = React.createClass({
 						<RaisedButton label="End Quiz" primary={true} onClick={this._endQuiz}/>
 					</div>
 				)
-			} if(!this.state.isStudent && !this.state.quiz.isProgress && this.state.quiz.isDone || true) {
-				//TODO
+			} else if(!this.state.isStudent && !this.state.quiz.isProgress && this.state.quiz.isDone) {
 				var quiz = (
 					<div style={{"margin":"10"}}>
 						<QuizResults questions={this.state.quiz.questions} />
 					</div>
 				)
 			} else if(!this.state.isStudent && !this.state.quiz.isProgress && !this.state.quiz.isDone) {
-				//TODO
-				var quiz = {}
+				var quiz = (
+					<div style={{"margin":"10"}}>
+						<EditQuiz quiz={this.state.quiz} />
+					</div>
+				)
 			}
 
 			return (

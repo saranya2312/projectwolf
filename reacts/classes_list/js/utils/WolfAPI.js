@@ -4,40 +4,34 @@ var WolfActions = require('../actions/WolfActions');
 module.exports = {
 	//Login a user
 	receiveClasses: function(callback) {
-		makeCorsRequest(function(responseText, error) {
+    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_classes_?user_email=" + document.cookie;
+		makeCorsRequest(url, function(responseText, error) {
 			if(!error) {
 				var result = JSON.parse(responseText);
-        var result = {
-            success: true,
-            classes: [
-              {
-                name: "CS 3750",
-                id: 1,
-                student: true
-              },
-              {
-                name: "CS 4641",
-                id: 2,
-                student: true
-              },
-              {
-                name: "CS 2110",
-                id: 3,
-                student: false
-              }
-            ]
-        }
         if(result.success) {
 				  callback(result);
         } else {
           window.location.href = '/';
         }
 			} else {
-				console.log("Some crazy business happened here and CORS failed");
+        console.log("CORS Failed. Redirect to login.");
+        window.location.href = '/';
 			}
 		});
+	},
 
-	}
+  addClass: function(classCode, callback) {
+    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/add_class?user_email=" + document.cookie;
+    url = url + "&cid=" + classCode
+    makeCorsRequest(url, function(responseText, error) {
+      if(!error) {
+        var result = JSON.parse(responseText);
+        callback(result)
+      } else {
+      }
+    });
+
+  }
 }
 
 // Create the XHR object.
@@ -58,11 +52,8 @@ function createCORSRequest(method, url) {
 }
 
 // Make the actual CORS request.
-function makeCorsRequest(callback) {
+function makeCorsRequest(url, callback) {
   // All HTML5 Rocks properties support CORS.
-
-  //TODO: Need to get the right end point here
-  var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_classes?user_email=ashwyn@gatech.edu"
 
   var xhr = createCORSRequest('GET', url);
   if (!xhr) {

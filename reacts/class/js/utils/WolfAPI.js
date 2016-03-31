@@ -10,6 +10,7 @@ module.exports = {
         var result = {
             success: true,
             name: "CS 4641",
+            isStudent: false,
             id: 1,
             quizzes: [
               {
@@ -19,10 +20,6 @@ module.exports = {
               {
                 name: "Quiz 2",
                 id: 2
-              },
-              {
-                name: "Quiz 3",
-                id: 3
               }
             ]
         }
@@ -36,7 +33,35 @@ module.exports = {
 			}
 		});
 
-	}
+	},
+
+  addQuiz: function(quizName, callback) {
+    makeCorsRequest(function(responseText, error) {
+      if(!error) {
+        var result = JSON.parse(responseText);
+        var result = {
+            success: true,
+            quizzes: [
+              {
+                name: "Quiz 1",
+                id: 1
+              },
+              {
+                name: "Quiz 2",
+                id: 2
+              },
+              {
+                name: quizName,
+                id: 3
+              },
+            ]
+        }
+        callback(result)
+      } else {
+        console.log("Some crazy business happened here and CORS failed");
+      }
+    });
+  }
 }
 
 // Create the XHR object.

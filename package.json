@@ -20,8 +20,7 @@
     "watchify": "*",
     "browserify": "~6.2.0",
     "envify": "~3.0.0",
-    "reactify": "^0.15",
-    "react-bootstrap": "*"
+    "reactify": "^0.15"
   },
   "browserify": {
     "transform": [

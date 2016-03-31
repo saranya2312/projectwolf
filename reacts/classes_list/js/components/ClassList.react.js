@@ -3,6 +3,7 @@ var ReactDOM = require("react-dom")
 var WolfActions = require('../actions/WolfActions');
 var WolfStore = require('../stores/WolfStore');
 var WolfConstants = require('../constants/WolfConstants');
+var AddClass = require('./AddClass.react');
 var AppBar = require('material-ui/lib/app-bar');
 var CircularProgress = require('material-ui/lib/circular-progress');
 var List = require('material-ui/lib/lists/list');
@@ -93,10 +94,10 @@ var ClassList = React.createClass({
 		} else {
 			var classes = this.state.classes.map(function(cl) {
 				console.log(cl.name);
-				classOnClick = classRedirect(cl.id)
+				classOnClick = classRedirect(cl.cid)
 				return (
 					<ListItem
-						key={cl.id}
+						key={cl.cid}
         				primaryText={cl.name}
         				onTouchTap={classOnClick} />
 				);
@@ -107,6 +108,7 @@ var ClassList = React.createClass({
 	    			<List>
 						{classes}
 					</List>
+					<AddClass />
 				</div>
 			);
 		}
