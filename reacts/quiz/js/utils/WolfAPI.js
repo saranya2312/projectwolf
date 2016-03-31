@@ -6,44 +6,11 @@ var classId = $('.class-id-span').attr('id');
 
 module.exports = {
 	receiveQuiz: function(quizId, classId, callback) {
-		makeCorsRequest(quizId, classId, function(responseText, error) {
+    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_quiz?user_email=" + document.cookie;
+    url = url + "&qid=" + quizId;
+		makeCorsRequest(url, function(responseText, error) {
 			if(!error) {
 				var result = JSON.parse(responseText);
-        var result = {
-            success: true,
-            isStudent: false,
-            className: "CS4641",
-            quiz: {
-              inProgress: false,
-              isDone: false,
-              dependsOnLocation: true,
-              name: "Quiz 1",
-              buildingName: "Skiles",
-              questions: [
-                  {
-                      text: "Are you here?",
-                      number: 1,
-                      options: [
-                          {
-                              id: 1,
-                              code: "A",
-                              text: "Yes",
-                              numStudents: 15,
-                          },
-                          {
-                              code: "B",
-                              id: 2,
-                              numStudents: 30,
-                              text: "No"
-                          }
-                      ],
-                      correctOption: "A",
-                      totalAnswered: 45,
-                      //The results can be empty until the quiz is closed.
-                  }
-              ]
-            }
-        }
         if(result.success) {
 				  callback(result);
         } else {
@@ -56,7 +23,7 @@ module.exports = {
 	},
 
   editQuiz: function(quiz, callback) {
-    makeCorsRequest(classId, quizId, function(responseText, error) {
+    makeCorsRequest(a, function(responseText, error) {
       if(!error) {
         var result = JSON.parse(responseText);
         var result = {
@@ -88,12 +55,7 @@ function createCORSRequest(method, url) {
 }
 
 // Make the actual CORS request.
-function makeCorsRequest(quizId, classId, callback) {
-  // All HTML5 Rocks properties support CORS.
-
-  //TODO: Need to get the right end point here
-  var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_classes?user_email=ashwyn@gatech.edu"
-
+function makeCorsRequest(url, callback) {
   var xhr = createCORSRequest('GET', url);
   if (!xhr) {
     alert('CORS not supported');

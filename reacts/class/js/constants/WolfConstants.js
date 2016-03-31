@@ -6,5 +6,4 @@ module.exports = ({
   	SET_MESSAGE: 'set_message',
 	SET_DIALOG: 'set_dialog',
 	SET_IS_STUDENT: 'set_is_student',
-	SET_ACTIVE: 'set_active',
 });

@@ -72,7 +72,6 @@ var QuizMain = React.createClass({
   	},
 
 	render: function() {
-		console.log("RE-RENDER");
 		var menus = (
 			<div>
 				<LeftNav
@@ -104,6 +103,7 @@ var QuizMain = React.createClass({
     			</div>
 			);
 		} else {
+			console.log(this.state.quiz);
 			var heading = this.state.className + " --> " + this.state.quiz.name
 
 			//STUDENT VIEWS

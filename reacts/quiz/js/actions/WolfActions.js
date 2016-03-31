@@ -5,6 +5,7 @@ var WolfAPI = require('../utils/WolfAPI');
 var WolfActions = {
 	receiveQuiz: function(quizId, classId) {
 		WolfAPI.receiveQuiz(quizId, classId, function(obj) {
+			console.log(obj);
 			WolfDispatcher.handleAction({
 				actionType: WolfConstants.RECEIVE_QUIZ,
 				obj: obj
@@ -37,6 +38,10 @@ var WolfActions = {
 			actionType: WolfConstants.SET_SPINNER,
 			obj: bool
 		});
+	},
+
+	checkLocation: function() {
+
 	},
 
 	editQuiz: function(quiz) {

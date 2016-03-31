@@ -5,9 +5,10 @@ var WolfAPI = require('../utils/WolfAPI');
 var WolfActions = {
 	receiveQuizzes: function(classId) {
 		WolfAPI.receiveQuizzes(classId, function(obj) {
+			console.log(obj);
 			WolfDispatcher.handleAction({
 				actionType: WolfConstants.RECEIVE_CLASSNAME,
-				obj: obj.name
+				obj: obj.className
 			});
 			WolfDispatcher.handleAction({
 				actionType: WolfConstants.SET_IS_STUDENT,

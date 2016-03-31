@@ -96,7 +96,7 @@ WolfDispatcher.register(function(payload) {
 			break;
 
 		case WolfConstants.SET_IS_STUDENT:
-			setDialog(action.obj);
+			setIsStudent(action.obj);
 			break;
 
 		default:

@@ -28,6 +28,11 @@ module.exports = {
         var result = JSON.parse(responseText);
         callback(result)
       } else {
+        console.log('CORS Failed. Redirect to login.')
+        callback({
+          success: false,
+          message: "Could not add quiz. Check your connection and try again."
+        })
       }
     });
 

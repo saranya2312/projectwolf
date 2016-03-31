@@ -4,32 +4,18 @@ var WolfActions = require('../actions/WolfActions');
 module.exports = {
 	//Login a user
 	receiveQuizzes: function(classId, callback) {
-		makeCorsRequest(function(responseText, error) {
+    var url =  "http://ashwyn.pythonanywhere.com/welcome/wolf/get_quizzes?user_email=" + document.cookie + "&cid=" + classId;
+		makeCorsRequest(url, function(responseText, error) {
 			if(!error) {
 				var result = JSON.parse(responseText);
-        var result = {
-            success: true,
-            name: "CS 4641",
-            isStudent: false,
-            id: 1,
-            quizzes: [
-              {
-                name: "Quiz 1",
-                id: 1
-              },
-              {
-                name: "Quiz 2",
-                id: 2
-              }
-            ]
-        }
         if(result.success) {
 				  callback(result);
         } else {
-          window.location.href = '/';
+          //window.location.href = '/';
         }
 			} else {
-				console.log("Some crazy business happened here and CORS failed");
+				//console.log("Some crazy business happened here and CORS failed");
+        //window.location.href = '/';
 			}
 		});
 
@@ -82,12 +68,8 @@ function createCORSRequest(method, url) {
 }
 
 // Make the actual CORS request.
-function makeCorsRequest(callback) {
+function makeCorsRequest(url, callback) {
   // All HTML5 Rocks properties support CORS.
-
-  //TODO: Need to get the right end point here
-  var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_classes?user_email=ashwyn@gatech.edu"
-
   var xhr = createCORSRequest('GET', url);
   if (!xhr) {
     alert('CORS not supported');

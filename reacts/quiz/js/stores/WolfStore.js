@@ -108,7 +108,7 @@ WolfDispatcher.register(function(payload) {
 	var action = payload.action;
 	switch(action.actionType) {
 		case WolfConstants.RECEIVE_QUIZ:
-			setQuiz(action.obj.quiz);
+			setQuiz(action.obj);
 			setClassName(action.obj.className);
 			setIsStudent(action.obj.isStudent);
 			break;

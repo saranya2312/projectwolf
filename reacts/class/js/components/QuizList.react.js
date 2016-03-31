@@ -100,10 +100,10 @@ var QuizList = React.createClass({
 				)
 			}
 			var quizzes = this.state.quizzes.map(function(quiz) {
-				quizOnClick = quizRedirect(quiz.id)
+				quizOnClick = quizRedirect(quiz.qid)
 				return (
 					<ListItem
-						key={quiz.id}
+						key={quiz.qid}
         				primaryText={quiz.name}
         				onTouchTap={quizOnClick} />
 				);
