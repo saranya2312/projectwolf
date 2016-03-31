@@ -1,10 +1,13 @@
 var JSON = require('JSON');
 var WolfActions = require('../actions/WolfActions');
 
+var username = $('.username-span').attr('id');
+
 module.exports = {
 	//Login a user
 	receiveClasses: function(callback) {
-    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_classes_?user_email=" + document.cookie;
+    console.log(username);
+    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_classes_?user_email=" + username;
 		makeCorsRequest(url, function(responseText, error) {
 			if(!error) {
 				var result = JSON.parse(responseText);
@@ -21,7 +24,7 @@ module.exports = {
 	},
 
   addClass: function(classCode, callback) {
-    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/add_class?user_email=" + document.cookie;
+    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/add_class?user_email=" + username;
     url = url + "&cid=" + classCode
     makeCorsRequest(url, function(responseText, error) {
       if(!error) {

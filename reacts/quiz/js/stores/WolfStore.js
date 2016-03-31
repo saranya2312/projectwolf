@@ -12,6 +12,10 @@ var _dialog = false;
 var _active = -1;
 
 
+function setLocation(buildingName) {
+	_location = buildingName;
+}
+
 function setQuiz(quiz) {
 	_quiz = quiz;
 }

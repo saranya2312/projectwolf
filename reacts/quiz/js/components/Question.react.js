@@ -17,6 +17,7 @@ var Question = React.createClass({
 		var options = this.props.question.options.map(function(option) {
 			return (
 				<RadioButton
+					key={option.oid}
 					onClick={changeOption(option.code, self.props.question.number, self.props.changeOptions)}
     				value={option.code}
     				label={option.text}/>

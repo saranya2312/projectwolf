@@ -1,21 +1,23 @@
 var JSON = require('JSON');
 var WolfActions = require('../actions/WolfActions');
 
+var username = $('.username-span').attr('id');
+
 module.exports = {
 	//Login a user
 	receiveQuizzes: function(classId, callback) {
-    var url =  "http://ashwyn.pythonanywhere.com/welcome/wolf/get_quizzes?user_email=" + document.cookie + "&cid=" + classId;
+    var url =  "http://ashwyn.pythonanywhere.com/welcome/wolf/get_quizzes?user_email=" + username + "&cid=" + classId;
 		makeCorsRequest(url, function(responseText, error) {
 			if(!error) {
 				var result = JSON.parse(responseText);
         if(result.success) {
 				  callback(result);
         } else {
-          //window.location.href = '/';
+          window.location.href = '/';
         }
 			} else {
 				//console.log("Some crazy business happened here and CORS failed");
-        //window.location.href = '/';
+        window.location.href = '/';
 			}
 		});
 

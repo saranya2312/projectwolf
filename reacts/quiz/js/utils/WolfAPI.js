@@ -2,11 +2,11 @@
 var WolfActions = require('../actions/WolfActions');
 var quizId = $('.quiz-id-span').attr('id');
 var classId = $('.class-id-span').attr('id');
-
+var username = $('.username-span').attr('id');
 
 module.exports = {
 	receiveQuiz: function(quizId, classId, callback) {
-    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_quiz?user_email=" + document.cookie;
+    var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/get_quiz?user_email=" + username;
     url = url + "&qid=" + quizId;
 		makeCorsRequest(url, function(responseText, error) {
 			if(!error) {

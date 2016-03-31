@@ -9,8 +9,7 @@ module.exports = {
 				var result = JSON.parse(responseText);
 				if(result.success) {
 					//Redirect to class list
-          document.cookie = username;
-					window.location.href = '/classes';
+					window.location.href = '/user/' + username + '/classes';
 				} else {
 					callback(result.msg)
 				}

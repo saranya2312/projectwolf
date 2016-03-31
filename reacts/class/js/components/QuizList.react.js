@@ -15,7 +15,8 @@ var AddQuiz = require('./AddQuiz.react');
 var quizRedirect = function(quizId) {
 	return function() {
 		var classId = $('.class-id-span').attr('id');
-		window.location = '/class/' + classId + '/quiz/' + quizId;
+		var username = $('.username-span').attr('id');
+		window.location = '/user/' + username + '/class/' + classId + '/quiz/' + quizId;
   	}
 }
 

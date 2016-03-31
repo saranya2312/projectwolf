@@ -12,9 +12,11 @@ var LeftNav = require('material-ui/lib/left-nav');
 var MenuItem = require('material-ui/lib/menus/menu-item');
 
 
+var username = $('.username-span').attr('id');
+
 var classRedirect = function(id) {
 	return function() {
-		window.location = '/class/' + id;
+		window.location = '/user/' + username + '/class/' + id;
   	}
 }
 

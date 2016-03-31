@@ -10,7 +10,7 @@ var TakeQuiz = React.createClass({
 		var self = this;
 		var questions = this.props.quiz.questions.map(function(question) {
 			return (
-				<div key={question.number}>
+				<div key={question.s_no}>
 					<Paper>
 						<Question 
 							changeOptions={self.props.changeOptions}
