@@ -5,7 +5,6 @@ var WolfAPI = require('../utils/WolfAPI');
 var WolfActions = {
 	receiveQuiz: function(quizId, classId) {
 		WolfAPI.receiveQuiz(quizId, classId, function(obj) {
-			console.log(obj);
 			WolfDispatcher.handleAction({
 				actionType: WolfConstants.RECEIVE_QUIZ,
 				obj: obj
@@ -88,7 +87,7 @@ var WolfActions = {
 		var self = this;
 		WolfAPI.endQuiz(function(obj) {
 			if(obj.success) {
-				//TODO
+				self.setDialogMessage(WolfConstants.QUIZ_ENDED);
 			} else {
 				self.setMessage(obj.message);
 			}
@@ -99,7 +98,7 @@ var WolfActions = {
 		var self = this;
 		WolfAPI.endQuiz(function(obj) {
 			if(obj.success) {
-				//TODO
+				self.setDialogMessage(WolfConstants.QUIZ_STARTED);
 			} else {
 				self.setMessage(obj.message);
 			}

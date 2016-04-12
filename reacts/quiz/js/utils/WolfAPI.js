@@ -6,11 +6,27 @@ var username = $('.username-span').attr('id');
 
 module.exports = {
   endQuiz: function() {
-    //var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/logout?user_email=" + username;
+    var url = "https://ashwyn.pythonanywhere.com/welcome/wolf/end_quiz?qid=" + quizId;
+    makeCorsRequest(url, function(responseText, error) {
+      if(!error) {
+        var result = JSON.parse(responseText);
+        callback(result)
+      } else {
+        callback({success: false, msg: "Quiz could not be ended. Check your internet and try again."});
+      }
+    });
   },
 
   startQuiz: function() {
-    //var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/logout?user_email=" + username;
+    var url = "https://ashwyn.pythonanywhere.com/welcome/wolf/start_quiz?qid=" + quizId;
+    makeCorsRequest(url, function(responseText, error) {
+      if(!error) {
+        var result = JSON.parse(responseText);
+        callback(result)
+      } else {
+        callback({success: false, msg: "Quiz could not be started. Check your internet and try again."});
+      }
+    });
   },
 
   logout: function() {
