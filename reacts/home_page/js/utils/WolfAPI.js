@@ -3,8 +3,9 @@ var WolfActions = require('../actions/WolfActions');
 
 module.exports = {
 	//Login a user
-	login: function(username, password, callback) {
-		makeCorsLoginRequest(username, password, function(responseText, error) {
+	login: function(username, callback) {
+    var url = ' https://ashwyn.pythonanywhere.com/welcome/wolf/isLoggedIn?user_email=' + username;
+		makeCorsRequest(url, function(responseText, error) {
 			if(!error) {
 				var result = JSON.parse(responseText);
 				if(result.success) {
@@ -18,7 +19,40 @@ module.exports = {
 			}
 		});
 
-	}
+	},
+
+  register: function(username, macAddress, callback) {
+      var url = 'https://ashwyn.pythonanywhere.com/welcome/wolf/verify_user?user_email=' + encodeURIComponent(username);
+      url = url + "&btId=" + encodeURIComponent(macAddress);
+      makeCorsRequest(url, function(responseText, error) {
+        if(!error) {
+          var result = JSON.parse(responseText);
+          callback(result);
+        } else {
+          callback(
+            {
+              msg:"Registration Failed. Please check your internet and try again"
+            }
+          );
+        }
+      });
+  },
+
+  otp: function(username, otp, callback) {
+    var url = 'https://ashwyn.pythonanywhere.com/welcome/wolf/verify_user_otp?user_email=' + username + '&otp=' + otp
+      makeCorsRequest(url, function(responseText, error) {
+        if(!error) {
+          var result = JSON.parse(responseText);
+          callback(result);
+        } else {
+          callback(
+            {
+              msg:"OTP Authentication Failed. Please check your internet and try again"
+            }
+          );
+        }
+      });
+  }
 }
 
 // Create the XHR object.
@@ -39,9 +73,8 @@ function createCORSRequest(method, url) {
 }
 
 // Make the actual CORS request.
-function makeCorsLoginRequest(username, password, callback) {
-  // All HTML5 Rocks properties support CORS.
-  var url = 'http://ashwyn.pythonanywhere.com/welcome/wolf/login?user_email=' + username;
+function makeCorsRequest(url, callback) {
+  // All HTML5 Rocks properties support CORS
   var xhr = createCORSRequest('GET', url);
   if (!xhr) {
     alert('CORS not supported');

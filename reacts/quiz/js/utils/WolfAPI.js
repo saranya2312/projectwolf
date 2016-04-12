@@ -5,6 +5,14 @@ var classId = $('.class-id-span').attr('id');
 var username = $('.username-span').attr('id');
 
 module.exports = {
+  endQuiz: function() {
+    //var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/logout?user_email=" + username;
+  },
+
+  startQuiz: function() {
+    //var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/logout?user_email=" + username;
+  },
+
   logout: function() {
     var url = "http://ashwyn.pythonanywhere.com/welcome/wolf/logout?user_email=" + username;
     makeCorsRequest(url, function(responseText, error) {
@@ -47,31 +55,27 @@ module.exports = {
     makeCorsRequest(url, function(responseText, error) {
       if(!error) {
         var result = JSON.parse(responseText);
-        if(!result.success) {
-          callback(result.msg);
-        } else {
-          window.location.href = '/user/' + username + '/class/' + classId;
-        }
+        callback(result);
       } else {
         console.log("Some crazy business happened here and CORS failed");
-        callback("Could not submit quiz. Please check your internet and try again.");
+        callback({success: false, msg: "Could not submit quiz. Please check your internet and try again."});
       }
     });
   },
 
-  editQuiz: function(quiz, callback) {
-    makeCorsRequest(a, function(responseText, error) {
-      if(!error) {
-        var result = JSON.parse(responseText);
-        var result = {
-            success: true,
-        }
-        callback(result)
-      } else {
-        console.log("Some crazy business happened here and CORS failed");
-      }
-    });
-  }
+  // editQuiz: function(quiz, callback) {
+  //   makeCorsRequest(a, function(responseText, error) {
+  //     if(!error) {
+  //       var result = JSON.parse(responseText);
+  //       var result = {
+  //           success: true,
+  //       }
+  //       callback(result)
+  //     } else {
+  //       console.log("Some crazy business happened here and CORS failed");
+  //     }
+  //   });
+  // }
 }
 
 // Create the XHR object.

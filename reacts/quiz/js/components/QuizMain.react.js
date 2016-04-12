@@ -13,16 +13,27 @@ var ListItem = require('material-ui/lib/lists/list-item');
 var LeftNav = require('material-ui/lib/left-nav');
 var MenuItem = require('material-ui/lib/menus/menu-item');
 var RaisedButton = require('material-ui/lib/raised-button');
+var Dialog = require('material-ui/lib/dialog');
+
+
+var quizId = $('.quiz-id-span').attr('id');
+var classId = $('.class-id-span').attr('id');
+var username = $('.username-span').attr('id');
+
+function redirect() {
+	window.location = '/user/' + username + '/class/' + classId;
+}
 
 
 function getQuizState() {
 	return {
-		submitError: WolfStore.getSubmitError(),
+		message: WolfStore.getMessage(),
 		answers: {},
 		open: false,
 		isStudent: WolfStore.getIsStudent(),
 		className: WolfStore.getClassName(),
 		quiz: WolfStore.getQuiz(),
+		dialogMessage: WolfStore.getDialogMessage()
 	};
 }
 
@@ -65,7 +76,6 @@ var QuizMain = React.createClass({
   	},
 
   	_submitQuiz: function() {
-  		console.log(this.state.answers);
   		WolfActions.submitQuiz(this.state.answers);
   	},
 
@@ -73,7 +83,37 @@ var QuizMain = React.createClass({
   		WolfActions.endQuiz();
   	},
 
+  	_startQuiz: function() {
+  		WolfActions.startQuiz();
+  	},
+
+  	_goToQuizList: function() {
+  		redirect();
+  	},
+
 	render: function() {
+		var dialog = (<div></div>);
+		console.log(this.state.dialogMessage);
+		if(this.state.dialogMessage != WolfConstants.NONE) {
+			actions = [ 
+				<RaisedButton
+        			label="OK"
+        			secondary={true}
+        			onTouchTap={this._goToQuizList}/>
+           	];
+			var dialog = (
+				<div>
+					<Dialog
+			          	title="Confirmation"
+		          		actions={actions}
+		          		modal={true}
+		          		open={true}
+		        	>
+		        		{this.state.dialogMessage}
+		        	</Dialog>
+				</div>
+			);
+		}
 		var menus = (
 			<div>
 				<LeftNav
@@ -113,7 +153,7 @@ var QuizMain = React.createClass({
 				var quiz = (
 					<div style={{"margin":"10"}}>
 						<TakeQuiz quiz={this.state.quiz} changeOptions={this._changeOptions}/>
-						<p style={{"color":"red"}}>{this.state.submitError} </p>
+						<p style={{"color":"red"}}>{this.state.message} </p>
 						<RaisedButton label="Submit" primary={true} onClick={this._submitQuiz}/>
 					</div>
 				)
@@ -159,6 +199,7 @@ var QuizMain = React.createClass({
 						<p> This quiz is currently in progress. </p>
 						<p> You may not edit at this time </p>
 						<RaisedButton label="End Quiz" primary={true} onClick={this._endQuiz}/>
+						<p style={{"color":"red"}}>{this.state.message} </p>
 					</div>
 				)
 			} else if(!this.state.isStudent && !this.state.quiz.isProgress && this.state.quiz.isDone) {
@@ -182,6 +223,8 @@ var QuizMain = React.createClass({
 						"transform": "translate(-50%, -50%)"
 					}}>
 					<p> You may edit this quiz from your admin console. </p>
+					<RaisedButton label="Start Quiz" primary={true} onClick={this._startQuiz}/>
+					<p style={{"color":"red"}}>{this.state.message} </p>
 				</div>
 			}
 
@@ -192,6 +235,7 @@ var QuizMain = React.createClass({
 		    		onLeftIconButtonTouchTap={this._openLeftNav}/>
 				  	{menus}
 				  	{quiz}
+				  	{dialog}
 				</div>
 			);
 		}

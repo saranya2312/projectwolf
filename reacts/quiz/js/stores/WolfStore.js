@@ -9,13 +9,9 @@ var _isStudent = false
 var _spinner = false;
 var _message = '';
 var _dialog = false;
+var _dialogMessage = WolfConstants.NONE;
 var _active = -1;
-var _submitError = '';
 
-
-function setSubmitError(error) {
-	_submitError = error;
-}
 
 function setQuiz(quiz) {
 	_quiz = quiz;
@@ -39,6 +35,11 @@ function setMessage(message) {
 
 function setActive(num) {
 	_active = num;
+}
+
+function setDialogMessage(bool) {
+	console.log(bool);
+	_dialogMessage = bool;
 }
 
 function addQuestion() {
@@ -95,6 +96,10 @@ var WolfStore = _.extend({}, EventEmitter.prototype, {
 			return '';
 		}
 	},
+	
+	getDialogMessage: function() {
+		return _dialogMessage;
+	},
 
 	getDialog: function(num) {
 		return _active == num;
@@ -141,6 +146,11 @@ WolfDispatcher.register(function(payload) {
 		case WolfConstants.SET_ACTIVE:
 			setActive(action.obj);
 			break;
+
+		case WolfConstants.SET_DIALOG_MESSAGE:
+			setDialogMessage(action.obj);
+			break;
+		
 
 		default:
 			return true;
