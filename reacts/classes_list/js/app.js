@@ -1,4 +1,5 @@
 window.React = require('react');
+ReactDOM = require('react-dom');
 
 var injectTapEventPlugin = require('react-tap-event-plugin');
 
@@ -7,10 +8,9 @@ var injectTapEventPlugin = require('react-tap-event-plugin');
 // Check this repo:
 // https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
-
 var ClassList = require('./components/ClassList.react');
 
-React.render(
+ReactDOM.render(
 	<ClassList />,
 	document.getElementById('wolf-app')
 );
