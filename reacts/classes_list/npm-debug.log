@@ -1,8 +1,5 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/node',
-1 verbose cli   '/usr/local/bin/npm',
-1 verbose cli   'run-script',
-1 verbose cli   'build' ]
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'run', 'build' ]
 2 info using npm@3.7.3
 3 info using node@v5.8.0
 4 verbose run-script [ 'prebuild', 'build', 'postbuild' ]
@@ -29,7 +26,7 @@
 15 verbose pkgid project-wolf@0.0.1
 16 verbose cwd /home/vignesh/Spring_2016/MAS/Project_Wolf/projectwolf/reacts/classes_list
 17 error Linux 3.13.0-83-generic
-18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run-script" "build"
+18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build"
 19 error node v5.8.0
 20 error npm  v3.7.3
 21 error code ELIFECYCLE

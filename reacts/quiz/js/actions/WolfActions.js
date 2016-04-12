@@ -77,7 +77,6 @@ var WolfActions = {
 	},
 
 	setDialogMessage: function(bool) {
-		console.log(bool);
 		WolfDispatcher.handleAction({
 			actionType: WolfConstants.SET_DIALOG_MESSAGE,
 			obj: bool
