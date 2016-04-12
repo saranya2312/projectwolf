@@ -20,6 +20,15 @@ var quizId = $('.quiz-id-span').attr('id');
 var classId = $('.class-id-span').attr('id');
 var username = $('.username-span').attr('id');
 
+var backToQuizList = function() {
+	window.location = '/user/' + username + '/class/' + classId;
+}
+
+var backToClassList = function() {
+	window.location = '/user/' + username + '/classes'
+}
+
+
 function redirect() {
 	window.location = '/user/' + username + '/class/' + classId;
 }
@@ -123,6 +132,8 @@ var QuizMain = React.createClass({
           			onRequestChange={this.handleToggle}
         		>
         			<img src="/static/leftNavImage.png" width="200"></img>
+        			<MenuItem onTouchTap={backToClassList}>Class List</MenuItem>
+        			<MenuItem onTouchTap={backToQuizList}>Quiz List</MenuItem>
           			<MenuItem onTouchTap={this._logout}>Logout</MenuItem>
         		</LeftNav>
 	        </div>

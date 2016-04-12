@@ -11,6 +11,10 @@ var LeftNav = require('material-ui/lib/left-nav');
 var MenuItem = require('material-ui/lib/menus/menu-item');
 var AddQuiz = require('./AddQuiz.react');
 
+var backToClassList = function() {
+	var username = $('.username-span').attr('id');
+	window.location = '/user/' + username + '/classes'
+}
 
 var quizRedirect = function(quizId) {
 	return function() {
@@ -76,6 +80,7 @@ var QuizList = React.createClass({
           			onRequestChange={this.handleToggle}
         		>
         			<img src="/static/leftNavImage.png" width="200"></img>
+        			<MenuItem onTouchTap={backToClassList}>Class List</MenuItem>
           			<MenuItem onTouchTap={this._logout}>Logout</MenuItem>
         		</LeftNav>
 	        </div>
